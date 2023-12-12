@@ -3,6 +3,8 @@ import { Suspense, useEffect, useState } from "react";
 import { Form } from "react-router-dom";
 import { socket } from "../utils/socket";
 import ServerList from '../components/ServerList';
+import ChannelList from "../components/ChannelList";
+import Loading from "../components/Loading";
 
 function Chat() {
 
@@ -27,13 +29,15 @@ function Chat() {
   return (
     <div className="flex w-screen h-screen bg-white">
       <nav className="bg-[#1e1e22] flex-1 h-full max-w-[60px]">
-        <Suspense fallback={<div className="w-[100px] h-[100px] text-white animate-spin"></div>}>
+        <Suspense fallback={<Loading />}>
           <ServerList />
         </Suspense>
       </nav>
 
       <aside className="bg-[#2b2d31] w-[240px] h-full">
-
+        <Suspense fallback={<Loading />}>
+          <ChannelList />
+        </Suspense>
       </aside>
 
       <main className="bg-[#313338] flex-1 h-full">

@@ -1,0 +1,44 @@
+[
+  {
+    "group": "group1",
+    "channels": [
+      {
+        "name": "channel1"
+      },
+      {
+        "name": "channel2"
+      },
+      {
+        "name": "channel3"
+      }
+    ]
+  },
+  {
+    "group": "group2",
+    "channels": [
+      {
+        "name": "channel1"
+      },
+      {
+        "name": "channel2"
+      },
+      {
+        "name": "channel3"
+      }
+    ]
+  },
+  {
+    "group": "group3",
+    "channels": [
+      {
+        "name": "channel1"
+      },
+      {
+        "name": "channel2"
+      },
+      {
+        "name": "channel3"
+      }
+    ]
+  }
+]
