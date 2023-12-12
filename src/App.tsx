@@ -1,6 +1,10 @@
 
 import { MantineProvider } from "@mantine/core";
 import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
@@ -15,12 +19,16 @@ const router = createBrowserRouter([
   },
 ]);
 
+const queryClient = new QueryClient();
+
 function App() {
 
   return (
-    <MantineProvider>
-      <RouterProvider router={router} />
-    </MantineProvider>
+    <QueryClientProvider client={queryClient}>
+      <MantineProvider>
+        <RouterProvider router={router} />
+      </MantineProvider>
+    </QueryClientProvider>
   )
 }
 
