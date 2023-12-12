@@ -1,7 +1,8 @@
-import { Button, Input } from "@mantine/core";
-import { useEffect, useState } from "react";
+import { Button, Input, } from "@mantine/core";
+import { Suspense, useEffect, useState } from "react";
 import { Form } from "react-router-dom";
 import { socket } from "../utils/socket";
+import ServerList from '../components/ServerList';
 
 function Chat() {
 
@@ -25,8 +26,17 @@ function Chat() {
 
   return (
     <div className="flex w-screen h-screen bg-white">
-      <aside className="bg-[#101015] flex-1 h-full max-w-[200px]"></aside>
-      <main className="bg-[#101015] flex-1 h-full">
+      <nav className="bg-[#1e1e22] flex-1 h-full max-w-[60px]">
+        <Suspense fallback={<div className="w-[100px] h-[100px] text-white animate-spin"></div>}>
+          <ServerList />
+        </Suspense>
+      </nav>
+
+      <aside className="bg-[#2b2d31] w-[240px] h-full">
+
+      </aside>
+
+      <main className="bg-[#313338] flex-1 h-full">
         <section className="h-full grid grid-rows-[15fr_1fr] max-w-[min(800px,1fr)] m-auto ">
           <section>
             <ul className="h-full w-full overflow-y-scroll">
@@ -36,12 +46,12 @@ function Chat() {
             </ul>
           </section>
 
-          <Form className="flex w-[90%] m-auto bg-[#1e1e24] items-center rounded-full px-[1rem] py-2" onSubmit={sendMessage} >
+          <Form className="flex w-[90%] m-auto bg-[#383a40] items-center rounded-full px-[1rem] py-2" onSubmit={sendMessage} >
             <Input
               name="message"
               classNames={{
                 wrapper: "flex flex-1 w-[90%] m-auto",
-                input: "w-full bg-[#1e1e24] border-none text-[#77777c]"
+                input: "w-full bg-[#383a40] border-none text-[#6d6f78]"
               }}
               multiline
               size="lg"
