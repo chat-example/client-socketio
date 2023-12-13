@@ -28,7 +28,7 @@ function Chat() {
 
   return (
     <div className="flex w-screen h-screen bg-white">
-      <nav className="bg-[#1e1e22] flex-1 h-full max-w-[60px]">
+      <nav className="bg-[#1e1e22] flex-1 h-full max-w-[80px]">
         <Suspense fallback={<Loading />}>
           <ServerList />
         </Suspense>
