@@ -2,9 +2,9 @@ import { Button, Input, } from "@mantine/core";
 import { Suspense, useEffect, useState } from "react";
 import { Form } from "react-router-dom";
 import { socket } from "../utils/socket";
-import ServerList from '../components/ServerList';
-import ChannelList from "../components/ChannelList";
-import Loading from "../components/Loading";
+import ServerList from '../components/leftNavigation/ServerList';
+import ChannelList from "../components/sideSection/ChannelList";
+import Loading from "../components/ui/Loading";
 
 function Chat() {
 

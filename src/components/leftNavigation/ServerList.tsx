@@ -1,7 +1,7 @@
-import { useServerList } from "../hooks/useServerList";
-import { IServer } from "../stores/server.slice";
-import { useServerBoundStore } from "../stores/useServerBoundStore";
-import Circle from "./Circle";
+import { useServerList } from "../../hooks/useServerList";
+import { IServer } from "../../stores/server.slice";
+import { useServerBoundStore } from "../../stores/useServerBoundStore";
+import Circle from "../ui/Circle";
 
 const ServerList = () => {
   const { data } = useServerList();

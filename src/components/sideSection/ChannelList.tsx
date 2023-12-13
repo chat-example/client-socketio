@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useChannelList } from "../hooks/useChannelList";
+import { useChannelList } from "../../hooks/useChannelList";
 import { FaHashtag } from "react-icons/fa";
 import { IoIosArrowDown } from 'react-icons/io';
 
