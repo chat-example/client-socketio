@@ -9,7 +9,9 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { Notifications } from '@mantine/notifications';
-import './index.css'
+import './index.css';
+import "@mantine/core/styles.css";
+import '@mantine/notifications/styles.css';
 import Chat from "./pages/chat";
 import Login from "./pages/login";
 import SignUp from './pages/signup';
@@ -35,8 +37,8 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <MantineProvider>
-        <Notifications />
+      <MantineProvider >
+        <Notifications position="top-right" zIndex={1000} />
         <RouterProvider router={router} />
       </MantineProvider>
     </QueryClientProvider>

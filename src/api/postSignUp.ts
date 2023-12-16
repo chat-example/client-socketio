@@ -8,7 +8,7 @@ export async function postSignUp(params:{ email: string; password: string; }) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(params),
-  })
+  });
 
-  return res.json();
+  return res;
 }

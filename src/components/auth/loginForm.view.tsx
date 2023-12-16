@@ -34,7 +34,7 @@ const LoginForm = ({
   })
 
   return <div className="w-screen h-screen flex justify-center items-center bg-[#6a77fc]">
-    <Form form={form} onSubmit={onConfirm} className="w-[30%] h-[40%] bg-[#313338] p-[3rem] flex flex-col gap-y-5 ">
+    <Form form={form} onSubmit={onConfirm} className="w-[30%] h-[45%] bg-[#313338] p-[3rem] flex flex-col gap-y-5 ">
       <div className="w-full text-center">
         <h1 className="text-[#f1f2f4] mb-3">{title}</h1>
 
