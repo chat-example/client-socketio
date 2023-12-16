@@ -10,13 +10,18 @@ import {
 } from "react-router-dom";
 import './index.css'
 import Chat from "./pages/chat";
+import Login from "./pages/login";
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Chat />
+    element: <Login />
   },
+  {
+    path: '/chat',
+    element: <Chat />
+  }
 ]);
 
 const queryClient = new QueryClient();
