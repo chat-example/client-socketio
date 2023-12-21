@@ -5,17 +5,17 @@ import { IoAlertOutline } from 'react-icons/io5';
 import SignUpForm from '../components/auth/signUpForm.view';
 
 const SignUp = () => {
-  const { data, mutateAsync, status } = useSignUp();
+  const { data, mutateAsync, status, isPending} = useSignUp();
 
   useEffect(() => {
-    if (!data) {
+    if (!data || isPending) {
       return;
     }
 
-    if (data.status> 299) { 
+    if (data.status > 299) { 
       notifications.show({
         title: '회원가입에 실패했습니다.',
-        message: '다시 시도해주세요.',
+        message: data.data.message!,
         autoClose: 5000,
         color: 'red',
         icon: <IoAlertOutline />,
@@ -27,7 +27,7 @@ const SignUp = () => {
         autoClose: 5000,
       });
     }
-  }, [data])
+  }, [data, isPending])
 
   return <SignUpForm
     onConfirm={mutateAsync}

@@ -1,6 +1,7 @@
 import { TextInput, Button } from "@mantine/core";
 import { Form, useForm } from "@mantine/form";
 import React from "react";
+import { ISignUpParams } from "../../api/postSignUp";
 
 const SignUpForm = ({
   title = '헤일로우!',
@@ -9,8 +10,8 @@ const SignUpForm = ({
   extraContent,
   onConfirm,
   isLoading,
- }: {
-  onConfirm?: (params: { email: string; password: string;  }) => void;
+}: {
+  onConfirm?: (params: ISignUpParams) => void;
   title?: string;
   subTitle?: string;
   confirm?: string;
@@ -49,7 +50,7 @@ const SignUpForm = ({
   })
 
   return <div className="w-screen h-screen flex justify-center items-center bg-[#6a77fc]">
-    <Form form={form} onSubmit={onConfirm} className="w-[30%] h-fit bg-[#313338] p-[3rem] flex flex-col gap-y-5 ">
+    <Form form={form} onSubmit={onConfirm} className="w-fit h-fit bg-[#313338] p-[3rem] flex flex-col gap-y-5 ">
       <div className="w-full text-center">
         <h1 className="text-[#f1f2f4] mb-3">{title}</h1>
 
@@ -59,9 +60,8 @@ const SignUpForm = ({
       <TextInput
         label="닉네임"
         placeholder="사용하실 닉네임을 입력해주세요."
-        {...form.getInputProps('email')}
-        name="email"
-        type="email"
+        {...form.getInputProps('nickname')}
+        name="nickname"
         classNames={{
           label: "text-[#b3b8be] mb-2 inline-block",
           required: "text-red-400",
