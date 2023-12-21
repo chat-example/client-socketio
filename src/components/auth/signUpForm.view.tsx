@@ -2,7 +2,7 @@ import { TextInput, Button } from "@mantine/core";
 import { Form, useForm } from "@mantine/form";
 import React from "react";
 
-const LoginForm = ({
+const SignUpForm = ({
   title = '헤일로우!',
   subTitle = '테스트를 열심히 하고있어요!',
   confirm = '로그인',
@@ -19,13 +19,28 @@ const LoginForm = ({
 }) => {
   const form = useForm({
     initialValues: {
+      nickname: "",
       email: "",
       password: "",
     },
     validate: {
+      nickname: (value) => {
+        if (!value) {
+          return '닉네임을 입력해주세요.';
+        }
+
+        return null;
+      },
       email: (value) => {
         if (!/^\S+@\S+$/.test(value)) { 
           return '이메일  양식이  올바르지  않습니다.';
+        }
+
+        return null;
+      },
+      password: (value) => {
+        if (!value) {
+          return '비밀번호를 입력해주세요.';
         }
 
         return null;
@@ -40,6 +55,21 @@ const LoginForm = ({
 
         <div className="text-[#b3b8be]">{subTitle}</div>
       </div> 
+
+      <TextInput
+        label="닉네임"
+        placeholder="사용하실 닉네임을 입력해주세요."
+        {...form.getInputProps('email')}
+        name="email"
+        type="email"
+        classNames={{
+          label: "text-[#b3b8be] mb-2 inline-block",
+          required: "text-red-400",
+          input: "w-full h-[2.5rem] rounded-md",
+          wrapper: "w-full"
+        }}
+        required
+      />
 
       <TextInput
         label="이메일"
@@ -88,4 +118,4 @@ const LoginForm = ({
   </div>
 }
 
-export default LoginForm;
+export default SignUpForm;

@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import LoginForm from '../components/auth/loginForm.view';
 import { useSignUp } from '../hooks/auth.hooks';
 import { notifications } from '@mantine/notifications';
 import { IoAlertOutline } from 'react-icons/io5';
+import SignUpForm from '../components/auth/signUpForm.view';
 
 const SignUp = () => {
   const { data, mutateAsync, status } = useSignUp();
@@ -29,7 +29,7 @@ const SignUp = () => {
     }
   }, [data])
 
-  return <LoginForm
+  return <SignUpForm
     onConfirm={mutateAsync}
     confirm='회원가입' 
     isLoading={status === "pending"}
