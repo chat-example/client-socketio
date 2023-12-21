@@ -3,14 +3,12 @@ import { IServer } from "../../stores/server.slice";
 import { useServerBoundStore } from "../../stores/useServerBoundStore";
 import Circle from "../ui/Circle";
 
-const ServerList = () => {
+const ServerList = () =>  {
   const { data } = useServerList();
   
-  return <ul className=" w-full p-0 flex flex-col gap-y-3 py-5 items-center">
-    {data?.map(({ name, thumbnail} ) => {
-      return <Server name={name} thumbnail={thumbnail} />
-    })}
-  </ul>
+  return data?.map(({ name, thumbnail} ) => {
+    return <Server name={name} thumbnail={thumbnail} />
+  })
 }
 
 export default ServerList;
