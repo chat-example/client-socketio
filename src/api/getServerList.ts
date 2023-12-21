@@ -20,18 +20,22 @@ export async function getServerList() {
       },
       credentials: "include",
     });
-
-    const data = await res.json();
-
-    if (res.status !== 200) {
-      throw data;
+  
+    const data = await res.json() as IServer[];
+  
+    if (res.status >= 300) {
+      return {
+        status: res.status,
+        data: [],
+        error: data,
+      }
     }
   
     return {
       status: res.status,
-      data: data as IServer[],
+      data,
     };
-  } catch (error){
+  } catch (error) {
     return {
       status: 500,
       data: [],
