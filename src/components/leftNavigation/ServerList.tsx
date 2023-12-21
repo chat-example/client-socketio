@@ -5,9 +5,13 @@ import Circle from "../ui/Circle";
 
 const ServerList = () =>  {
   const { data } = useServerList();
+
+  if (data.status > 299) {
+    return null;
+  }
   
-  return data?.map(({ name, thumbnail} ) => {
-    return <Server name={name} thumbnail={thumbnail} />
+  return data?.data.map(({ name, banner } ) => {
+    return <Server name={name} thumbnail={banner ?? ""} />
   })
 }
 

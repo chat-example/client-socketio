@@ -1,8 +1,41 @@
-import { sleep } from '../utils/time';
-import servers from './dummy/server.json'
+import { SERVER_API } from './constants';
+
+export interface IServer {
+  id: string;
+  name: string;
+  description: string | null;
+  icon: string | null;
+  banner: string |null;
+  createdAt: string;
+  updatedAt: string;
+}
 
 export async function getServerList() {
-  await sleep(5000);
+  try {
+    const res = await fetch(`${SERVER_API}/server/`, {
+      method: 'get',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      credentials: "include",
+    });
 
-  return servers
+    const data = await res.json();
+
+    if (res.status !== 200) {
+      throw data;
+    }
+  
+    return {
+      status: res.status,
+      data: data as IServer[],
+    };
+  } catch (error){
+    return {
+      status: 500,
+      data: [],
+      error,
+    }
+  }
 }
