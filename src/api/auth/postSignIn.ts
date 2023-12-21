@@ -1,13 +1,12 @@
-import { SERVER_API } from "./constants";
+import { SERVER_API } from "../constants";
 
-export interface ISignUpParams {
+export interface ISignInParams {
   email: string;
   password: string;
-  nickname: string;
 }
 
-export async function postSignUp(params:ISignUpParams) {
-  const res = await fetch(`${SERVER_API}/user/signupByEmail`, {
+export async function postSignIn(params:ISignInParams) {
+  const res = await fetch(`${SERVER_API}/user/signInByEmail`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',

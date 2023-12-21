@@ -1,7 +1,7 @@
 import { TextInput, Button } from "@mantine/core";
 import { Form, useForm } from "@mantine/form";
 import React from "react";
-import { ISignInParams } from "../../api/postSignIn";
+import { ISignInParams } from "../../api/auth/postSignIn";
 
 const LoginForm = ({
   title = '헤일로우!',

@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { ISignUpParams, postSignUp } from '../api/postSignUp';
-import { ISignInParams, postSignIn } from "../api/postSignIn";
+import { ISignUpParams, postSignUp } from '../api/auth/postSignUp';
+import { ISignInParams, postSignIn } from "../api/auth/postSignIn";
 
 // 회원가입
 const UseSignUpKey = 'useSignUpKey';

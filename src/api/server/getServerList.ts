@@ -1,4 +1,4 @@
-import { SERVER_API } from './constants';
+import { SERVER_API } from '../constants';
 
 export interface IServer {
   id: string;
