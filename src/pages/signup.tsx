@@ -5,7 +5,7 @@ import { IoAlertOutline } from 'react-icons/io5';
 import SignUpForm from '../components/auth/signUpForm.view';
 
 const SignUp = () => {
-  const { data, mutateAsync, status, isPending} = useSignUp();
+  const { data, mutateAsync, isPending} = useSignUp();
 
   useEffect(() => {
     if (!data || isPending) {
@@ -32,7 +32,7 @@ const SignUp = () => {
   return <SignUpForm
     onConfirm={mutateAsync}
     confirm='회원가입' 
-    isLoading={status === "pending"}
+    isLoading={isPending}
   />;
 }
 

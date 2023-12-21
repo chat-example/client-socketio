@@ -1,6 +1,7 @@
 import { TextInput, Button } from "@mantine/core";
 import { Form, useForm } from "@mantine/form";
 import React from "react";
+import { ISignInParams } from "../../api/postSignIn";
 
 const LoginForm = ({
   title = '헤일로우!',
@@ -10,7 +11,7 @@ const LoginForm = ({
   onConfirm,
   isLoading,
  }: {
-  onConfirm?: (params: { email: string; password: string;  }) => void;
+  onConfirm?: (params: ISignInParams) => void;
   title?: string;
   subTitle?: string;
   confirm?: string;
