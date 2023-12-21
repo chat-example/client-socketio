@@ -31,6 +31,7 @@ const SignUp = () => {
       });
       navigate(NAVIGATION_PATH.CHAT);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, isPending])
 
   return <SignUpForm
