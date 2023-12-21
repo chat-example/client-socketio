@@ -1,12 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoginForm from "../components/auth/loginForm.view";
 import { useSignIn } from "../hooks/auth.hooks";
 import { notifications } from "@mantine/notifications";
 import { useEffect } from "react";
 import { IoAlertOutline } from "react-icons/io5";
+import { NAVIGATION_PATH } from "../utils/path.const";
 
 const Login = () => {
   const { data, mutateAsync, isPending} = useSignIn();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!data || isPending) {
@@ -27,6 +29,7 @@ const Login = () => {
         message: '환영합니다!',
         autoClose: 5000,
       });
+      navigate(NAVIGATION_PATH.CHAT);
     }
   }, [data, isPending])
 

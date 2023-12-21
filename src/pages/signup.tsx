@@ -3,9 +3,12 @@ import { useSignUp } from '../hooks/auth.hooks';
 import { notifications } from '@mantine/notifications';
 import { IoAlertOutline } from 'react-icons/io5';
 import SignUpForm from '../components/auth/signUpForm.view';
+import { useNavigate } from 'react-router-dom';
+import { NAVIGATION_PATH } from '../utils/path.const';
 
 const SignUp = () => {
   const { data, mutateAsync, isPending} = useSignUp();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!data || isPending) {
@@ -26,6 +29,7 @@ const SignUp = () => {
         message: '환영합니다!',
         autoClose: 5000,
       });
+      navigate(NAVIGATION_PATH.CHAT);
     }
   }, [data, isPending])
 
