@@ -15,18 +15,19 @@ import '@mantine/notifications/styles.css';
 import Chat from "./pages/chat";
 import Login from "./pages/login";
 import SignUp from './pages/signup';
+import { NAVIGATION_PATH } from "./utils/path.const";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: NAVIGATION_PATH.LOGIN,
     element: <Login />
   },
   {
-    path: '/chat',
+    path: NAVIGATION_PATH.CHAT,
     element: <Chat />
   },
   {
-    path: "/signup",
+    path: NAVIGATION_PATH.SIGNUP,
     element: <SignUp />
   }
 ]);
