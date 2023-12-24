@@ -25,3 +25,11 @@ export interface IChannelGroup {
   serverId?: number;
   channels?: IChannel[];
 }
+
+export interface IMessage {
+  id: bigint;
+  content: string;
+  updatedAt: string;
+  createdAt: string;
+  authorId: bigint;
+}

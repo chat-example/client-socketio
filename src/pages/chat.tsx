@@ -1,13 +1,14 @@
 import { Button, Input, } from "@mantine/core";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Form } from "react-router-dom";
 import { socket } from "../utils/socket";
 import LeftNavigation from '../components/leftNavigation/LeftNavigation';
 import LeftSideSection from "../components/leftSideSection/LeftSideSection";
+import { useMessageList } from "../hooks/message/useMessageList";
+import { useServerBoundStore } from "../stores/useServerBoundStore";
+import { IMessage } from "../api/types";
 
 function Chat() {
-  const [messageList, setMessageList] = useState<string[]>([]);
-
   const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -16,13 +17,14 @@ function Chat() {
     e.currentTarget.message.value = "";
   };
   
-  useEffect(() => {
-    const setMessageReceived = (data: { message: string; }) => {
-      setMessageList([...messageList, data.message]);
-    }
+  // useEffect(() => {
+  //   const setMessageReceived = (data: { message: string; }) => {
+  //     setMessageList([...messageList, data.message]);
+  //   }
 
-    socket.on("receive_message", setMessageReceived);
-  }, [messageList]);
+  //   socket.on("receive_message", setMessageReceived);
+  // }, [messageList]);
+
 
   return (
     <div className="flex w-screen h-screen bg-white">
@@ -37,11 +39,9 @@ function Chat() {
       <main className="bg-[#313338] flex-1 h-full">
         <section className="h-full grid grid-rows-[15fr_1fr] max-w-[min(800px,1fr)] m-auto ">
           <section>
-            <ul className="h-full w-full overflow-y-scroll">
-              {messageList.map((message, index) => (
-                <li key={index} className="text-white">{message}</li>
-              ))}
-            </ul>
+            <Suspense>
+              <MessageList />
+            </Suspense>
           </section>
 
           <Form className="flex w-[90%] m-auto bg-[#383a40] items-center rounded-full px-[1rem] py-2" onSubmit={sendMessage} >
@@ -64,3 +64,25 @@ function Chat() {
 }
 
 export default Chat;
+function MessageList() {
+
+  const currentChannel = useServerBoundStore((state) => state.currentChannel);
+  const { data } = useMessageList(currentChannel ? String(currentChannel?.id) : null);
+
+  const [messageList, setMessageList] = useState<IMessage[]>([]);
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+
+    setMessageList(data.data);
+  }, [data])
+
+  return <ul className="h-full w-full overflow-y-scroll">
+    {messageList.map((message, index) => (
+      <li key={index} className="text-white">{message.content}</li>
+    ))}
+  </ul>;
+}
+
