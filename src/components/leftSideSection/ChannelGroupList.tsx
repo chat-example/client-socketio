@@ -6,6 +6,7 @@ import { useServerBoundStore } from '../../stores/useServerBoundStore';
 import { IChannelGroup } from "../../api/types";
 import { FaPlus } from "react-icons/fa6";
 import { modals } from '@mantine/modals';
+import AddChannel from './AddChannel';
 
 const ChannelGroupList = () => {
   const currentServer = useServerBoundStore((state) => state.currentServer);
@@ -32,6 +33,7 @@ function ChannelGroup(channelGroup: IChannelGroup){
   const handlePlusButtonClick = () => {
     modals.open({
       title: "채널 생성",
+      children: <AddChannel channelGroupId={String(channelGroup.id)} />
     });
   }
 
@@ -42,7 +44,7 @@ function ChannelGroup(channelGroup: IChannelGroup){
 
         {channelGroup.name}
 
-        <FaPlus />
+        <FaPlus onClick={handlePlusButtonClick} />
       </p>
 
       {isOpened && channelGroup.channels?.map(({ name }) => <Channel key={name}  name={name} />)}
