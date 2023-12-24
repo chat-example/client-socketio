@@ -7,6 +7,7 @@ import { SlLogin } from "react-icons/sl";
 import { MdPostAdd } from "react-icons/md";
 import { modals } from "@mantine/modals";
 import JoinServer from "./JoinServer";
+import AddServer from "./AddServer";
 
 const LeftNavigation = () => {
   return <ul className=" w-full p-0 flex flex-col gap-y-3 py-5 items-center">
@@ -25,6 +26,13 @@ function PlusServer() {
     modals.open({
       title: "서버 접속",
       children: <JoinServer />,
+    })
+  }
+
+  const handleAddServerButtonClick = () => {
+    modals.open({
+      title: "서버 추가",
+      children: <AddServer />
     })
   }
 
@@ -49,7 +57,10 @@ function PlusServer() {
           서버 접속
         </Menu.Item>
 
-        <Menu.Item leftSection={<MdPostAdd className="w-[0.9rem] h-[0.9rem]" />}>
+        <Menu.Item
+          leftSection={<MdPostAdd className="w-[0.9rem] h-[0.9rem]" />}
+          onClick={handleAddServerButtonClick}
+        >
           서버 추가
         </Menu.Item>
       </Menu.Dropdown>
