@@ -1,20 +1,54 @@
 import { Button, TextInput } from "@mantine/core";
 import { Form, useForm } from "@mantine/form";
+import { useJoinServer } from '../../hooks/sevrer/useJoinServer';
+import { useEffect } from 'react';
+import { notifications } from "@mantine/notifications";
+import { modals } from '@mantine/modals';
+import { useQueryClient } from '@tanstack/react-query';
+import { UseServerListQueryKey } from "../../hooks/sevrer/useServerList";
 
 const JoinServer = () => {
+  const { mutateAsync, data } = useJoinServer();
+  const queryClient = useQueryClient();
+
   const form = useForm({
     initialValues: {
-      serverName: "",
+      name: "",
       password: "",
     },
-  })
+  });
 
-  return <Form form={form} className="flex flex-col gap-y-3">
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+
+    if (data.status < 300) {
+      notifications.show({
+        title: "서버 접속 성공",
+        message: "서버에 성공적으로 접속했습니다.",
+        color: "green",
+      });
+      modals.closeAll();
+      queryClient.invalidateQueries({
+        queryKey: [UseServerListQueryKey],
+      });
+    } else if(data.status > 300) {
+      notifications.show({
+        title: "서버 접속 실패",
+        message: "서버 접속에 실패했습니다.",
+        color: "red",
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data?.status]);
+
+  return <Form form={form} onSubmit={mutateAsync} className="flex flex-col gap-y-3">
       <TextInput
-        name="serverName"
+        name="name"
         label="서버 이름"
         placeholder="서버 이름을 입력해주세요."
-        {...form.getInputProps('serverName')}
+        {...form.getInputProps('name')}
       />
 
       <TextInput
