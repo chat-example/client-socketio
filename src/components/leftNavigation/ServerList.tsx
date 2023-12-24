@@ -11,7 +11,7 @@ const ServerList = () =>  {
   }
   
   return data?.data.map(({ name, banner } ) => {
-    return <Server name={name} thumbnail={banner ?? ""} />
+    return <Server key={name} name={name} thumbnail={banner ?? ""} />
   })
 }
 
