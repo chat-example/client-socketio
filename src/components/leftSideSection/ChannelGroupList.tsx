@@ -4,6 +4,8 @@ import { FaHashtag } from "react-icons/fa";
 import { IoIosArrowDown } from 'react-icons/io';
 import { useServerBoundStore } from '../../stores/useServerBoundStore';
 import { IChannelGroup } from "../../api/types";
+import { FaPlus } from "react-icons/fa6";
+import { modals } from '@mantine/modals';
 
 const ChannelGroupList = () => {
   const currentServer = useServerBoundStore((state) => state.currentServer);
@@ -23,16 +25,24 @@ export default ChannelGroupList;
 function ChannelGroup(channelGroup: IChannelGroup){
   const [isOpened, setIsOpened] = useState<boolean>(false);
 
-  const handleOnClickGroup = () => {
+  const handleChannelGroupClick = () => {
     setIsOpened((opened) => !opened);
+  }
+
+  const handlePlusButtonClick = () => {
+    modals.open({
+      title: "채널 생성",
+    });
   }
 
   return <div key={channelGroup.name} className="flex items-center text-[#949BA4] gap-y-5">
     <ul className="pl-1 flex flex-col gap-y-3">
-      <p className="flex gap-x-2 cursor-pointer" onClick={handleOnClickGroup}>
+      <p className="flex gap-x-2 cursor-pointer items-center" onClick={handleChannelGroupClick}>
         <IoIosArrowDown className={`transition-all ${isOpened ? "" : "-rotate-90"}`} />
 
         {channelGroup.name}
+
+        <FaPlus />
       </p>
 
       {isOpened && channelGroup.channels?.map(({ name }) => <Channel key={name}  name={name} />)}
