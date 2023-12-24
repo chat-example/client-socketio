@@ -4,14 +4,18 @@ import { useEffect } from 'react';
 import { notifications } from "@mantine/notifications";
 import { modals } from '@mantine/modals';
 import { useQueryClient } from '@tanstack/react-query';
-import { UseServerListQueryKey } from "../../hooks/sevrer/useServerList";
 import { useAddChannelGroup } from "../../hooks/channelGroup/useAddChannelGroup";
 import { useServerBoundStore } from "../../stores/useServerBoundStore";
+import { UseChannelGroupListQueryKey } from "../../hooks/channelGroup/useChannelGroupList";
 
 const AddChannelGroup = () => {
   const currentServer = useServerBoundStore((state) => state.currentServer);
   const { mutateAsync, data } = useAddChannelGroup();
   const queryClient = useQueryClient();
+
+  const handleModalCancelButtonClick = () => {
+    modals.closeAll();
+  }
 
   const form = useForm({
     initialValues: {
@@ -33,7 +37,7 @@ const AddChannelGroup = () => {
       });
       modals.closeAll();
       queryClient.invalidateQueries({
-        queryKey: [UseServerListQueryKey],
+        queryKey: [UseChannelGroupListQueryKey, currentServer?.id ?? null],
       });
     } else if(data.status > 300) {
       notifications.show({
@@ -66,6 +70,7 @@ const AddChannelGroup = () => {
           variant="filled"
           type="submit"
           style={{ backgroundColor: "#f44336" }}
+          onClick={handleModalCancelButtonClick}
           >
             취소
         </Button>

@@ -5,7 +5,7 @@ export const UseChannelGroupListQueryKey = "useChannelGroupListQueryKey";
 
 export function useChannelGroupList(params: IGetChannelListParams) {
   const result = useSuspenseQuery({
-    queryKey: [UseChannelGroupListQueryKey],
+    queryKey: [UseChannelGroupListQueryKey, params.serverId],
     queryFn: () => getChannelGroupList(params),
   });
 

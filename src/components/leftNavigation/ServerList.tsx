@@ -1,5 +1,5 @@
+import { IServer } from "../../api/types";
 import { useServerList } from "../../hooks/sevrer/useServerList";
-import { IServer } from "../../stores/server.slice";
 import { useServerBoundStore } from "../../stores/useServerBoundStore";
 import Circle from "../ui/Circle";
 
@@ -10,8 +10,8 @@ const ServerList = () =>  {
     return null;
   }
   
-  return data?.data.map(({ name, banner } ) => {
-    return <Server key={name} name={name} thumbnail={banner ?? ""} />
+  return data?.data.map((server) => {
+    return <Server key={server.name} {...server} />
   })
 }
 
