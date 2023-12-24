@@ -1,4 +1,4 @@
-import { useServerList } from "../../hooks/useServerList";
+import { useServerList } from "../../hooks/sevrer/useServerList";
 import { IServer } from "../../stores/server.slice";
 import { useServerBoundStore } from "../../stores/useServerBoundStore";
 import Circle from "../ui/Circle";
