@@ -53,5 +53,9 @@ function ChannelGroup(channelGroup: IChannelGroup){
 }
 
 function Channel({ name }: { name: string }) {
-  return <li key={name} className="ml-4 list-none flex gap-x-2"><FaHashtag /> {name}</li>;
+  return <li key={name} className="ml-4 list-none flex gap-x-2 items-center">
+    <FaHashtag />
+
+    {name}
+  </li>;
 }
