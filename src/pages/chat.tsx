@@ -2,7 +2,7 @@ import { Button, Input, } from "@mantine/core";
 import { Suspense, useEffect, useState } from "react";
 import { Form } from "react-router-dom";
 import { socket } from "../utils/socket";
-import ServerList from '../components/leftNavigation/ServerList';
+import LeftNavigation from '../components/leftNavigation/LeftNavigation';
 import ChannelList from "../components/sideSection/ChannelList";
 import Loading from "../components/ui/Loading";
 
@@ -29,9 +29,7 @@ function Chat() {
   return (
     <div className="flex w-screen h-screen bg-white">
       <nav className="bg-[#1e1e22] flex-1 h-full max-w-[80px]">
-        <Suspense fallback={<Loading />}>
-          <ServerList />
-        </Suspense>
+        <LeftNavigation />
       </nav>
 
       <aside className="bg-[#2b2d31] w-[240px] h-full">

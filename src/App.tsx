@@ -16,6 +16,7 @@ import Chat from "./pages/chat";
 import Login from "./pages/login";
 import SignUp from './pages/signup';
 import { NAVIGATION_PATH } from "./utils/path.const";
+import { ModalsProvider } from "@mantine/modals";
 
 const router = createBrowserRouter([
   {
@@ -39,8 +40,10 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <MantineProvider >
-        <Notifications position="top-right" zIndex={1000} />
-        <RouterProvider router={router} />
+        <ModalsProvider>
+          <Notifications position="top-right" zIndex={1000} />
+          <RouterProvider router={router} />
+        </ModalsProvider>
       </MantineProvider>
     </QueryClientProvider>
   )

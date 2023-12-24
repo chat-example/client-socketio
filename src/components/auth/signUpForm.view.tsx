@@ -1,7 +1,7 @@
 import { TextInput, Button } from "@mantine/core";
 import { Form, useForm } from "@mantine/form";
 import React from "react";
-import { ISignUpParams } from "../../api/postSignUp";
+import { ISignUpParams } from "../../api/auth/postSignUp";
 
 const SignUpForm = ({
   title = '헤일로우!',
@@ -50,7 +50,7 @@ const SignUpForm = ({
   })
 
   return <div className="w-screen h-screen flex justify-center items-center bg-[#6a77fc]">
-    <Form form={form} onSubmit={onConfirm} className="w-fit h-fit bg-[#313338] p-[3rem] flex flex-col gap-y-5 ">
+    <Form form={form} onSubmit={onConfirm} className="min-w-fit max-w-[40%] w-full h-fit bg-[#313338] p-[3rem] flex flex-col gap-y-5 ">
       <div className="w-full text-center">
         <h1 className="text-[#f1f2f4] mb-3">{title}</h1>
 

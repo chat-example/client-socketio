@@ -1,16 +1,18 @@
-import { useServerList } from "../../hooks/useServerList";
+import { useServerList } from "../../hooks/sevrer/useServerList";
 import { IServer } from "../../stores/server.slice";
 import { useServerBoundStore } from "../../stores/useServerBoundStore";
 import Circle from "../ui/Circle";
 
-const ServerList = () => {
+const ServerList = () =>  {
   const { data } = useServerList();
+
+  if (data.status > 299) {
+    return null;
+  }
   
-  return <ul className=" w-full p-0 flex flex-col gap-y-3 py-5 items-center">
-    {data?.map(({ name, thumbnail} ) => {
-      return <Server name={name} thumbnail={thumbnail} />
-    })}
-  </ul>
+  return data?.data.map(({ name, banner } ) => {
+    return <Server name={name} thumbnail={banner ?? ""} />
+  })
 }
 
 export default ServerList;
