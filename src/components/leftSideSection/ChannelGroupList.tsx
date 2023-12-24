@@ -3,7 +3,7 @@ import { useChannelGroupList } from "../../hooks/channelGroup/useChannelGroupLis
 import { FaHashtag } from "react-icons/fa";
 import { IoIosArrowDown } from 'react-icons/io';
 import { useServerBoundStore } from '../../stores/useServerBoundStore';
-import { IChannelGroup } from "../../api/types";
+import { IChannel, IChannelGroup } from "../../api/types";
 import { FaPlus } from "react-icons/fa6";
 import { modals } from '@mantine/modals';
 import AddChannel from './AddChannel';
@@ -47,13 +47,21 @@ function ChannelGroup(channelGroup: IChannelGroup){
         <FaPlus onClick={handlePlusButtonClick} />
       </p>
 
-      {isOpened && channelGroup.channels?.map(({ name }) => <Channel key={name}  name={name} />)}
+      {isOpened && channelGroup.channels?.map((channel) => <Channel key={channel.id} channel={channel} />)}
     </ul>
   </div>;
 }
 
-function Channel({ name }: { name: string }) {
-  return <li key={name} className="ml-4 list-none flex gap-x-2 items-center">
+function Channel({ channel }: { channel: IChannel }) {
+  const { name } = channel;
+
+  const setCurrentChannel = useServerBoundStore((state) => state.channelAction.setCurrentChannel);
+
+  const handleChannelClick = () => {
+    setCurrentChannel(channel);
+  }
+
+  return <li key={name} className="ml-4 list-none flex gap-x-2 items-center cursor-pointer" onClick={handleChannelClick}>
     <FaHashtag />
 
     {name}
