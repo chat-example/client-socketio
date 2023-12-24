@@ -1,9 +1,14 @@
-import { SERVER_API } from '../constants';
-import { IServer } from '../types';
+import { SERVER_API } from "../constants";
+import { IChannelGroup } from "../types";
 
-export async function getServerList() {
+
+export interface IGetChannelListParams {
+  serverId?: string | null;
+}
+
+export async function getChannelGroupList({ serverId, }: IGetChannelListParams) {
   try {
-    const res = await fetch(`${SERVER_API}/server/`, {
+    const res = await fetch(`${SERVER_API}/channelGroup/${serverId ?? 0}`, {
       method: 'get',
       headers: {
         'Accept': 'application/json',
@@ -12,7 +17,7 @@ export async function getServerList() {
       credentials: "include",
     });
   
-    const data = await res.json() as IServer[];
+    const data = await res.json() as IChannelGroup[];
   
     if (res.status >= 300) {
       return {

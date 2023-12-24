@@ -1,13 +1,11 @@
 import { Button, Input, } from "@mantine/core";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Form } from "react-router-dom";
 import { socket } from "../utils/socket";
 import LeftNavigation from '../components/leftNavigation/LeftNavigation';
-import ChannelList from "../components/sideSection/ChannelList";
-import Loading from "../components/ui/Loading";
+import LeftSideSection from "../components/leftSideSection/LeftSideSection";
 
 function Chat() {
-
   const [messageList, setMessageList] = useState<string[]>([]);
 
   const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
@@ -33,9 +31,7 @@ function Chat() {
       </nav>
 
       <aside className="bg-[#2b2d31] w-[240px] h-full">
-        <Suspense fallback={<Loading />}>
-          <ChannelList />
-        </Suspense>
+        <LeftSideSection />
       </aside>
 
       <main className="bg-[#313338] flex-1 h-full">

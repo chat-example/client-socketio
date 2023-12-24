@@ -1,18 +1,24 @@
 import { SERVER_API } from '../constants';
-import { IServer } from '../types';
 
-export async function getServerList() {
+export interface IAddChannelGroupParams {
+  name: string;
+  description: string;
+  serverId: string | null;
+}
+
+export async function postAddChannelGroup({ serverId, ...body }: IAddChannelGroupParams) {
   try {
-    const res = await fetch(`${SERVER_API}/server/`, {
-      method: 'get',
+    const res = await fetch(`${SERVER_API}/channelGroup/${serverId}`, {
+      method: 'post',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       credentials: "include",
+      body: JSON.stringify(body),
     });
   
-    const data = await res.json() as IServer[];
+    const data = await res.json();
   
     if (res.status >= 300) {
       return {

@@ -1,9 +1,5 @@
 import { StateCreator } from "zustand";
-
-export interface IServer {
-  name: string;
-  thumbnail: string;
-}
+import { IServer } from "../api/types";
 
 interface IServerState {
   currentServer: IServer | null;
