@@ -28,13 +28,6 @@ function Chat() {
     e.currentTarget.message.value = "";
   };
   
-  // useEffect(() => {
-  //   const setMessageReceived = (data: { message: string; }) => {
-  //     setMessageList([...messageList, data.message]);
-  //   }
-
-  //   socket.on("receive_message", setMessageReceived);
-  // }, [messageList]);
 
   return (
     <div className="flex w-screen h-screen bg-white">
@@ -79,9 +72,19 @@ function Chat() {
 export default Chat;
 function MessageList() {
   const currentChannel = useServerBoundStore((state) => state.currentChannel);
+  const socket = useServerBoundStore((state) => state.socket);
   const { data } = useMessageList(currentChannel ? String(currentChannel?.id) : null);
 
   const [messageList, setMessageList] = useState<IMessage[]>([]);
+
+  useEffect(() => {
+    const setMessageReceived = (data: IMessage) => {
+      setMessageList([...messageList, data]);
+    }
+
+    socket?.on("receive_message", setMessageReceived);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [socket, messageList]);
 
   useEffect(() => {
     if (!data) {

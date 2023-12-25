@@ -28,10 +28,20 @@ export const createChannelSlice: StateCreator<ChannelSlice & ServerSlice, [], []
   ...initialState,
   channelAction: {
     setCurrentChannel: (currentChannelGroup, currentChannel) => {
+      const { currentServer } = get();
+
+      const connectionData = {
+        serverId: currentServer?.id,
+        channelId: currentChannel.id,
+        channelGroupId: currentChannelGroup.id,
+      }
+
       set((state) => {
         state.currentChannel = currentChannel;
         state.currentChannelGroup = currentChannelGroup;
-        state.socket = manager.socket('/');
+        state.socket = manager.socket('/', {
+          auth: connectionData,
+        });
 
         return state;
       });
