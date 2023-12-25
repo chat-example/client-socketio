@@ -1,19 +1,30 @@
-import { Button, Input, } from "@mantine/core";
+import { ActionIcon, Input, } from "@mantine/core";
 import { Suspense, useEffect, useState } from "react";
 import { Form } from "react-router-dom";
-import { socket } from "../utils/socket";
 import LeftNavigation from '../components/leftNavigation/LeftNavigation';
 import LeftSideSection from "../components/leftSideSection/LeftSideSection";
 import { useMessageList } from "../hooks/message/useMessageList";
 import { useServerBoundStore } from "../stores/useServerBoundStore";
 import { IMessage } from "../api/types";
+import { IoMdSend } from "react-icons/io";
 
 function Chat() {
+  const currentServer = useServerBoundStore((state) => state.currentServer);
+  const currentChannelGroup = useServerBoundStore((state) => state.currentChannelGroup);
+  const currentChannel = useServerBoundStore((state) => state.currentChannel);
+  const socket = useServerBoundStore((state) => state.socket);
+
   const sendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const message = e.currentTarget.message.value;
-    socket.emit("send_message", { message });
+    console.log(message, socket);
+    socket?.emit("send_message", {
+      message,
+      serverId: currentServer?.id,
+      channelGroupId: currentChannelGroup?.id,
+      channelId: currentChannel?.id,
+    });
     e.currentTarget.message.value = "";
   };
   
@@ -24,7 +35,6 @@ function Chat() {
 
   //   socket.on("receive_message", setMessageReceived);
   // }, [messageList]);
-
 
   return (
     <div className="flex w-screen h-screen bg-white">
@@ -54,8 +64,11 @@ function Chat() {
               multiline
               size="lg"
               placeholder="채팅을 입력하세요"
-              rightSection={<Button type="submit" className="py-2 px-4 rounded-full w-[60px]">주기</Button>} 
             />
+
+            <ActionIcon type="submit" className="ml-2 py-2 px-4 rounded-full w-[60px] cursor-pointer">
+              <IoMdSend size={20} />
+            </ActionIcon>
           </Form>
         </section>
       </main>
@@ -65,7 +78,6 @@ function Chat() {
 
 export default Chat;
 function MessageList() {
-
   const currentChannel = useServerBoundStore((state) => state.currentChannel);
   const { data } = useMessageList(currentChannel ? String(currentChannel?.id) : null);
 

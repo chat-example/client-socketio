@@ -24,7 +24,7 @@ const ChannelGroupList = () => {
 export default ChannelGroupList;
 
 function ChannelGroup(channelGroup: IChannelGroup){
-  const [isOpened, setIsOpened] = useState<boolean>(false);
+  const [isOpened, setIsOpened] = useState<boolean>(true);
 
   const handleChannelGroupClick = () => {
     setIsOpened((opened) => !opened);
@@ -47,18 +47,18 @@ function ChannelGroup(channelGroup: IChannelGroup){
         <FaPlus onClick={handlePlusButtonClick} />
       </p>
 
-      {isOpened && channelGroup.channels?.map((channel) => <Channel key={channel.id} channel={channel} />)}
+      {isOpened && channelGroup.channels?.map((channel) => <Channel key={channel.id} channel={channel} channelGroup={channelGroup} />)}
     </ul>
   </div>;
 }
 
-function Channel({ channel }: { channel: IChannel }) {
+function Channel({ channel, channelGroup }: { channel: IChannel, channelGroup: IChannelGroup}) {
   const { name } = channel;
 
   const setCurrentChannel = useServerBoundStore((state) => state.channelAction.setCurrentChannel);
 
   const handleChannelClick = () => {
-    setCurrentChannel(channel);
+    setCurrentChannel(channelGroup, channel);
   }
 
   return <li key={name} className="ml-4 list-none flex gap-x-2 items-center cursor-pointer" onClick={handleChannelClick}>
